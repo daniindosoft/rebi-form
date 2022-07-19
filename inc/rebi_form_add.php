@@ -1,54 +1,114 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
 <div class="m-4">
     <h4><i class="fa fa-plus"></i> Buat Form</h4>
 </div>
 <div class="m-4 p-4 panel">
     <form>
-        <div class="mb-3">
-            <!-- nama, pixel, harga, form type, field -->
-            <label for="exampleInputEmail1" class="form-label fw-bold">Nama Form</label>
-            <input type="email" class="border-dark form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Bagian ini tidak akan ditampilkan pada user</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label fw-bold">Script</label>
-            <textarea name="" class="border-dark form-control"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label fw-bold">Atur Harga</label>
-            <input type="email" class="border-dark form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label fw-bold">Form Type</label>
-            <select name="" id="" class="border-dark form-control">
-                <option value="">Lead</option>
-                <option value="">Form</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold">Pilih Field</label>
-            <div class="panel panel-default p-3">
-            <div class="row">
-                <div class="col-lg-6">Field</div>
-                <div class="col-lg-6 text-end">Order</div>
+        <div class="row">
+            <div class="mb-3 col-lg-7">
+                <!-- nama, pixel, harga, form type, field -->
+                <label for="exampleInputEmail1" class="form-label fw-bold">Nama Form</label>
+                <input type="email" class="border-dark form-control" >
+                <div id="emailHelp" class="form-text">Bagian ini tidak akan ditampilkan pada user</div>
             </div>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-lg-6">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                    Default checkbox
-                    </label>
-                        </div>
-                        <div class="col-lg-6 text-end">
-                            <button class="btn-sm btn-danger btn"><i class="fa fa-arrow-down"></i></button>
-                            <button class="btn-sm btn-danger btn"><i class="fa fa-arrow-up"></i></button>
-                        </div>
+            <div class="mb-3 col-lg-4">
+                <label for="exampleInputPassword1" class="form-label fw-bold">Atur Harga</label>
+                <input type="number " class="border-dark form-control">
+            </div>
+            <div class="mb-3 col-lg-4">
+                <label for="exampleInputPassword1" class="form-label fw-bold">Form Type</label>
+                <select name="" id="" class="border-dark form-control">
+                    <option>Form Lead</option>
+                    <option>Purchase Form</option>
+                </select>
+            </div>
+            <div class="mb-3 col-lg-4">
+                <label for="exampleInputPassword1" class="form-label fw-bold">Produk</label>
+                <select name="" id="" class="border-dark form-control">
+                    <option>Form Lead</option>
+                    <option>Purchase Form</option>
+                </select>
+                <div id="emailHelp" class="form-text">Kosongkan jika tidak ingin mengkaitkan form ini dengan produk</div>
+            </div>
+        
+            <div class="mb-3">
+                <label class="form-label fw-bold">Pilih Field</label>
+                <div class="panel panel-default p-3">
+                    <div class="row fw-bold">
+                        <div class="col-lg-4">Nama</div>
+                        <div class="col-lg-4">Type</div>
+                        <div class="col-lg-3">Lebar</div>
+                        <div class="col-lg-1 text-end"></div>
                     </div>
-                </li>
-            </ul>
+                    <ul class="list-group parentitemfield">
+                        <li class="list-group-item itemfield">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" placeholder="nama field" name="name">
+                                </div>
+                                <div class="col-lg-4">
+                                    <select class="form-control" name="type">
+                                        <option>Text</option>
+                                        <option>Select</option>
+                                        <option>Textarea</option>
+                                        <option>-</option>
+                                        <option>Nama</option>
+                                        <option>E-Mail</option>
+                                        <option>No Hp/Whatsapp</option>
+                                        <option>Jenis Kelamin</option>
+                                        <option>Kecamatan</option>
+                                        <option>Kabupaten/Kota</option>
+                                        <option>Provinsi</option>
+                                        <option>Alamat Lengkap</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <select class="form-control" name="width">
+                                        <?php echo $option=self::rebiFormLoop(10); ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-1 text-end">
+                                    <button type="button" class="btn-sm btn-warning btn"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="btn btn-sm btn-success" type="button" id="addrow"><i class="fa fa-plus"></i> Tambah Field</button>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-danger btn-sm">Buat Form</button>
-    </form>
+            <button type="submit" class="btn btn-danger btn-sm">Buat Form</button>
+        </form>
+    </div>
 </div>
+<script type="text/javascript">
+    var numrow = 0;
+    var option = '<?php echo $option; ?>';
+    $(document).ready(function() {
+        $('#addrow').on('click', function(){
+            numrow = $('.itemfield').length + 1;
+            $('.parentitemfield').append(`
+                    <li class="list-group-item itemfield">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="nama field" name="name">
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control" name="type">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <select class="form-control" name="width">
+                                    `+option+`
+                                </select>
+                            </div>
+                            <div class="col-lg-1 text-end">
+                                <button type="button" class="btn-sm btn-warning btn"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                `);
+        });
+    });
+</script>

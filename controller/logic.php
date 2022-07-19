@@ -21,7 +21,17 @@
 		public function rebiFormView($filename)
 		{
 			self::rebiFormCustomStyle();
+
 			include_once(RDRFO.$filename);
+		}
+
+		public function rebiFormLoop($limit)
+		{
+			$result = '';
+			for ($i=1; $i <=$limit; $i++) { 
+				$result .= '<option value="'.$i.'">'.$i.'</option>';
+			}
+			return $result;
 		}
 		
 	}

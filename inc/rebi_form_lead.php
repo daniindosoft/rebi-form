@@ -1,16 +1,13 @@
 <div class="m-4">
-    <h4><i class="fa fa-plus"></i> Buat Form</h4>
+    <h4><i class="fa fa-users"></i> Data Lead</h4>
 </div>
 <div class="mt-4 p-4">
-	<a href="<?php echo admin_url('admin.php?page=rebiform_list&action=add') ?>" class="btn btn-danger btn-sm"><i class="fa fa-plus"></i> Tambah Form</a>
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>No</th>
-				<th>Nama Form</th>
-				<th>Total Lead</th>
-				<th>Total Profit</th>
-				<th>Shortcode</th>
+				<th>Field Pertama</th>
+				<th>Form</th>
 				<th></th>
 			</tr>
 		</thead>

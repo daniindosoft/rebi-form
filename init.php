@@ -12,34 +12,37 @@ define('RDRFO', plugin_dir_path(__FILE__));
 function rebiform_function_install() {
 
     global $wpdb;
-
+    $tblform = $wpdb->prefix . 'rebiform_form';
+    $tblfield = $wpdb->prefix . 'rebiform_field';
+    $tbllead = $wpdb->prefix . 'rebiform_lead';
     $sql = "
-    	 CREATE TABLE rebiform_form(
+    	 CREATE TABLE $tblform(
 			id int(11) auto_increment,
 			name varchar(100),
-			form_type char(2),
+			form_type char(2) COMMENT '0 = lead, 1 = purchase',
 			price int(15),
 			produk int(15),
+			shortcode varchar(30),
 			primary key(id)
-		)
+		);
 
 
-		CREATE TABLE rebiform_form(
+		CREATE TABLE $tblfield(
 			id int(11) auto_increment,
 			id_form int(11),
 			field_name varchar(20),
 			type char(50),
 			lebar int(2),
 			primary key(id)
-		)
+		);
 
 
-		CREATE TABLE rebiform_form(
+		CREATE TABLE $tbllead(
 			id int(11) auto_increment,
 			id_form_line int(11),
 			value varchar(200),
 			
-		)
+		);
 
     ";
 

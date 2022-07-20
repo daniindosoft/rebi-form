@@ -8,6 +8,7 @@
 <span class="badge bg-dark">Dark</span> -->
 <div class="row">
 	<div class="col-lg-6">
+		<br>
 		<h3>Rentang tanggal</h3>
 		<div class="panel p-2">
 			<input type="date" name=""> <i class="fa fa-arrows-h"></i> <input type="date" name="">
